@@ -17,7 +17,7 @@ function sqlQuery($sql)
 	$link = sqlConnect();
 	$res=mysqli_query($link, $sql);
 	$ret = [];
-	while (false !== ($row = mysql_fetch_assoc($res))) {
+	while ($row = mysqli_fetch_assoc($res)) {
 		$ret[] = $row;
 	}
 	return $ret;

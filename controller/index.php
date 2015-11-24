@@ -6,4 +6,4 @@ function newsGetAll()
 	$sql = 'SELECT * FROM news';
 	return sqlQuery($sql);
 }
-//var_dump(newsGetAll());
+var_dump(newsGetAll());
