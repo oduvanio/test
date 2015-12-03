@@ -6,11 +6,8 @@ function addNews($title, $description, $picture = '')
 	if (!$title || !$description) {
 		$res = 'Новость не может быть добавлена, т.к. заполена не полностью';
 	} else {
-		$sql = "INSERT INTO news VALUES ('".$title."', '".$description."', '".$picture."')";
-		echo $sql;
-		die;
+		$sql = "INSERT INTO news (title, description, picture) VALUES ('".$title."', '".$description."', '".$picture."')";
 		$res = sqlExec($sql);
 	}
 	return $res;
 }
-addNews('Самолет', 'Летел из шарм-эль-шейха');

@@ -10,7 +10,6 @@ function sqlExec($sql)
 {
 	$link = sqlConnect();
 	$res=mysqli_query($link, $sql);
-	if ($res) return true;
 }
 function sqlQuery($sql)
 {
