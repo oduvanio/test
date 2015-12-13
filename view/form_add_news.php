@@ -1,4 +1,4 @@
-<form action="../controller/add_news.php" method="post" enctype="multipart/form-data">
+<form action="controller/add_news.php" method="post" enctype="multipart/form-data">
 	<label for="title">Заголовок</label>
 	<input type="text" id="title" name="title">
 	<hr>
