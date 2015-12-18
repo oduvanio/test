@@ -1,4 +1,5 @@
 <?php
-require_once __DIR__ . '/../model/get_all.php';
+require_once __DIR__ . '/../DB/DB.php';
 
-$news = newsGetAll();
+$news = new DB();
+$news = $news->newsGetAll();
