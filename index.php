@@ -1,5 +1,10 @@
 <?php
-require_once __DIR__ . '/controller/news_all.php';
+require_once __DIR__ . '/autoload.php';
 
-include __DIR__. '/view/index.php';
-include __DIR__. '/view/form_add_news.php';
+$ctrl = isset($_GET['ctrl'] ? $_GET['ctrl'] : 'News');
+$act = isset($_GET['act'] ? $_GET['act'] : 'All');
+$controllerClassName = $ctrl . 'Controller';
+require_once __DIR__ . '/controller/' . $controllerClassName . '.php';
+$controller = new $controllerClassName;
+$method = 'action' . $act;
+$controller->method();

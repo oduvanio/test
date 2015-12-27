@@ -4,57 +4,38 @@ class DB {
 	public $ret;
 	public function __construct()
 	{
-		$this->link = mysqli_connect('localhost', 'root', '');
-		mysqli_select_db($this->link, 'news_test');
-		mysqli_set_charset($this->link, 'utf8');
+		$mysqli = new mysqli('localhost', 'root', '');
+		$mysqli->select_db('news_test');
+		$mysqli->set_charset('utf8');
+		$this->mysqli = $mysqli;
 	}
-	public function sqlExec($sql)
+	public function queryGetAll($sql, $class='stdClass')
 	{
-		$res=mysqli_query($this->link, $sql);
-	}
-	public function sqlQuery($sql)
-	{
-		$res=mysqli_query($this->link, $sql);
-		$this->ret = [];
-		while ($row = mysqli_fetch_assoc($res)) {
-			$this->ret[] = $row;
+		$res = $this->mysqli->query($sql);
+		if (false===$res) {
+			return false;
 		}
-		return $this->ret;
-	}
-	public function addNews($title, $description, $picture = '')
-	{
-		if (!$title || !$description) {
-			$this->res = 'Новость не может быть добавлена, т.к. заполена не полностью';
-		} else {
-			$sql = "INSERT INTO news (title, description, picture) VALUES ('".$title."', '".$description."', '".$picture."')";
-			$this->res = $this->sqlExec($sql);
+		$ret = [];
+		while ($row = mysql_fetch_object($res, $class)) {
+			$ret[] = $row;
 		}
-		return $this->res;
+		return $ret;
 	}
-	public function newsGetOne($id)
+	public function queryGetOne($sql, $class='stdClass')
 	{
-		$sql = "SELECT * FROM news WHERE id='".$id."'";
-		return $this->sqlQuery($sql);
+		return $this->queryGetAll($sql, $class)[0];
 	}
-	public function newsOneDelete($id)
+	public function queryAddOne($sql)
 	{
-		$sql = "DELETE FROM news WHERE id='".$id."'";
-		return $this->sqlQuery($sql);
+		$this->mysqli->query($sql);
 	}
-	public function newsOneUpdate($id, $title, $description, $picture = '')
+	public function queryDeleteOne($sql)
+	{
+		$this->mysqli->query($sql);
+	}
+	public function queryUpdateOne($sql)
 	{
 		
-		if (!$title || !$description) {
-			$this->res = 'Новость не может быть изменена, т.к. заполена не полностью';
-		} else {
-			$sql = "UPDATE news SET title='".$title."', description='".$description."', picture='".$picture."' WHERE id='".$id."'";
-			return $this->sqlQuery($sql);
-		}
-		return $this->res;
-	}
-	public function newsGetAll()
-	{
-		$sql = "SELECT * FROM news";
-		return $this->sqlQuery($sql);
+		$this->mysqli->query($sql);
 	}
 }
