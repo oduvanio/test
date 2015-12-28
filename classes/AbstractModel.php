@@ -1,12 +1,12 @@
 <?php
-abstract class AbstractModel()
+abstract class AbstractModel
 {
 	protected static $table;
 	protected static $class;
 	public static function getAll()
 	{
 		$db = new DB();
-		$sql = 'SELECT * FROM' . static::$table;
+		$sql = 'SELECT * FROM ' . static::$table;
 		return $db->queryGetAll($sql, static::$class);
 	}
 	public static function getOne($id)
@@ -38,7 +38,7 @@ abstract class AbstractModel()
 			$res = 'Новость не может быть изменена, т.к. заполена не полностью';
 		} else {
 			$db = new DB();
-			$sql = 'UPDATE ' . static::$table . ' SET title=' .$title. ', description=' .$description. ', picture=' .$picture. ' WHERE id=' .$id.;
+			$sql = 'UPDATE ' . static::$table . ' SET title=' .$title. ', description=' .$description. ', picture=' .$picture. ' WHERE id=' .$id;
 			$db->queryUpdateOne($sql);
 		}
 		return $this->res;

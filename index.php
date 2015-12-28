@@ -7,4 +7,5 @@ $controllerClassName = $ctrl . 'Controller';
 require_once __DIR__ . '/controller/' . $controllerClassName . '.php';
 $controller = new $controllerClassName;
 $method = 'action' . $act;
-$controller->method();
+//echo $method; die;
+$controller->$method();

@@ -16,7 +16,7 @@ class DB {
 			return false;
 		}
 		$ret = [];
-		while ($row = mysql_fetch_object($res, $class)) {
+		while ($row = $res->fetch_object($class)) {
 			$ret[] = $row;
 		}
 		return $ret;
