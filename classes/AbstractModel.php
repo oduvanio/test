@@ -22,7 +22,7 @@ abstract class AbstractModel
 			return $res;
 		} else {
 			$db = new DB();
-			$sql = "INSERT INTO news (title, description, picture) VALUES ('".$title."', '".$description."', '".$picture."')";
+			$sql = "INSERT INTO " . static::$table . " (title, description, picture) VALUES ('".$title."', '".$description."', '".$picture."')";
 			$db->queryAddOne($sql);
 		}
 	}
