@@ -19,12 +19,12 @@ abstract class AbstractModel
 	{
 		if (!$title || !$description) {
 			$res = 'Новость не может быть добавлена, т.к. заполена не полностью';
+			return $res;
 		} else {
 			$db = new DB();
 			$sql = "INSERT INTO news (title, description, picture) VALUES ('".$title."', '".$description."', '".$picture."')";
 			$db->queryAddOne($sql);
 		}
-		return $res;
 	}
 	public static function deleteOne($id)
 	{
@@ -42,5 +42,23 @@ abstract class AbstractModel
 			$db->queryUpdateOne($sql);
 		}
 		return $this->res;
+	}
+	public static function imageUpload($field)
+	{
+		if (empty($_FILES)) {
+			return false;
+		}
+		if (0 != $_FILES[$field]['error']) {
+			return false;
+		}
+		if (is_uploaded_file($_FILES[$field]['tmp_name'])) {
+			$res = move_uploaded_file($_FILES[$field]['tmp_name'], __DIR__ . '/../images/' . $_FILES[$field]['name']); //в какую папку положить необходимо указывать относительно существующего пути
+		}
+		if (!$res) {
+			return false;
+		} else {
+			return $_FILES[$field]['name'];
+		}
+		return false;
 	}
 }

@@ -13,5 +13,6 @@
 		<a href="index.php?act=One&id=<?php echo $item->id; ?>">Страница новости</a>
 		<hr>
 	<?php endforeach; ?>
+	<a href="index.php?ctrl=Admin&act=Add">Добавить новость</a>
 </body>
 </html>

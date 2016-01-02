@@ -16,11 +16,11 @@ class AdminController
 	{
 		include __DIR__ . '/../view/form_add_news.php';
 	}
-	public function addOne()
+	public function actionAddOne()
 	{
 		$title = $_POST['title'];
 		$description = $_POST['description'];
-		$picture = $_POST['image'];
+		$picture = !empty($_FILES) ? News::imageUpload('image') : '';
 		News::addOne($title, $description, $picture);
 		$this->actionAll();
 	}
