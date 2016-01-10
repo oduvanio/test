@@ -1,4 +1,4 @@
-<form action="index.php?ctrl=Admin&act=Add" method="post" enctype="multipart/form-data">
+<form action="index.php?ctrl=Admin&act=Update" method="post" enctype="multipart/form-data">
 	<label for="title">Заголовок</label>
 	<input type="text" id="title" name="title">
 	<hr>
