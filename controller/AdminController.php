@@ -30,7 +30,7 @@ class AdminController
 	}
 	public function actionUpdate()
 	{
-		//if (isset($_POST['title']) || isset($_POST['description']) || !empty($_FILES)) {
+		if (isset($_POST['title']) || isset($_POST['description']) || !empty($_FILES)) {
 			if (isset($_POST['title']) && $_POST['title'] !== '') {
 				$this->title = $_POST['title'];
 			}
@@ -41,8 +41,13 @@ class AdminController
 				$picture = News::imageUpload('image');
 				$this->picture = $picture;
 			}
-			$this->save();
-		//}
+			$this->id = $_GET['id'];
+			$news = new News();
+			$news->save();
+		} else {
+			include __DIR__ . '/../view/form_update_news.php';
+			exit;
+		}
 		$this->actionAll();
 	}
 	public function actionDelete()

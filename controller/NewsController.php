@@ -10,7 +10,6 @@ class NewsController
 	}
 	public function actionOne()
 	{
-		$id = $_GET['id'];
 		$news = News::findOne($id);
 		$view = new View();
 		$view->items = $news;

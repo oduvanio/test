@@ -52,6 +52,7 @@ abstract class AbstractModel
 	*/
 	protected function insert()
 	{
+
 		$cols = array_keys($this->data);
 		$ins = [];
 		$data = [];
